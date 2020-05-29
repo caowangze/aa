@@ -45,7 +45,7 @@ void Output()
 {  
 ReadyQueue *print = Head;  
 PCB *p;  
-printf("pro ID  pri  round  cputime  needtime  proing  count");  
+printf("Process name /  priority /  rounds / tcpu time /  required time /  process status /  counter / n");  
 while(print)  
 {  
   if(print ->LinkPCB != NULL)  
@@ -53,7 +53,7 @@ while(print)
    p=print ->LinkPCB;  
    while(p)  
    {  
-    printf("%s/t%d/t%d/t%d/t%d/t/t%c/t/t%d/n",p->name,p->prio,p->round,p->cputime,p->needtime,p->state,p->count);     
+    printf("%s/ %d/ %d/ %d/ %d/ / %c/ / %d/n",p->name,p->prio,p->round,p->cputime,p->needtime,p->state,p->count);     
     p = p->next;  
    }  
   }  
@@ -62,13 +62,13 @@ while(print)
 p = finish;  
 while(p!=NULL)  
 {  
-  printf("%s/t%d/t%d/t%d/t%d/t/t%c/t/t%d/n",p->count);  
+  printf("%s/ %d/ %d/ %d/ %d/ / %c/ / %d/n",p->count);  
   p = p->next;  
 }  
 p = run;  
 while(p!=NULL)  
 {  
-  printf("%s/t%d/t%d/t%d/t%d/t/t%c/t/t%d/n",p->count);  
+  printf("%s/ %d/ %d/ %d/ %d/ / %c/ / %d/n",p->count);  
   p = p->next;  
 }  
  
@@ -137,10 +137,10 @@ void PrioCreate() /*创建就绪队列输入函数*/
 ReadyQueue *tmp;  
 int i;  
  
-printf("int line number：");  
+printf("Enter the number of ready queues：");  
 scanf("%d",&ReadyNum);  
  
-printf("int cputime：");  
+printf("Enter the CPU time slice of each ready queue：");  
 for(i = 0;i < ReadyNum; i++)  
 {  
   if((tmp = (ReadyQueue *)malloc(sizeof(ReadyQueue)))==NULL)  
@@ -191,9 +191,9 @@ void ProcessCreate() /*进程创建函数*/
 PCB *tmp;  
 int i;  
  
-printf("int pro number：");  
+printf("Enter the number of processes：");  
 scanf("%d",&num);  
-printf("int pronameandtime：");  
+printf("Enter the process name and process time：");  
 for(i = 0;i < num; i++)  
 {  
   if((tmp = (PCB *)malloc(sizeof(PCB)))==NULL)  
