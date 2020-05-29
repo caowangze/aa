@@ -1,51 +1,51 @@
 #include <stdio.h>  
 #include <stdlib.h>  
 #include <string.h>  
-typedef struct node   /*进程节点信息*/  
+typedef struct node  
 {  
-char name[20];   /*进程的名字*/  
-int prio;    /*进程的优先级*/  
-int round;    /*分配CPU的时间片*/  
-int cputime;   /*CPU执行时间*/  
-int needtime;   /*进程执行所需要的时间*/  
-char state;    /*进程的状态，W——就绪态，R——执行态，F——完成态*/  
-int count;    /*记录执行的次数*/  
-struct node *next;  /*链表指针*/  
+char name[20];   
+int prio;   
+int round;   
+int cputime;   
+int needtime;   
+char state;    
+int count;    
+struct node *next;  
 }PCB;  
-typedef struct Queue  /*多级就绪队列节点信息*/  
+typedef struct Queue 
 {  
-PCB *LinkPCB;   /*就绪队列中的进程队列指针*/  
-int prio;    /*本就绪队列的优先级*/  
-int round;    /*本就绪队列所分配的时间片*/  
-struct Queue *next;  /*指向下一个就绪队列的链表指针*/  
+PCB *LinkPCB;   
+int prio;     
+int round;   
+struct Queue *next; 
 }ReadyQueue;  
-PCB *run=NULL,*finish=NULL; /*定义三个队列，就绪队列，执行队列和完成队列*/  
-ReadyQueue *Head = NULL; /*定义第一个就绪队列*/  
-int num;     /*进程个数*/  
-int ReadyNum;    /*就绪队列个数*/  
-void Output();          /*进程信息输出函数*/  
-void InsertFinish(PCB *in);       /*将进程插入到完成队列尾部*/  
-void InsertPrio(ReadyQueue *in);     /*创建就绪队列，规定优先数越小，优先级越低*/  
-void PrioCreate();         /*创建就绪队列输入函数*/  
-void GetFirst(ReadyQueue *queue);     /*取得某一个就绪队列中的队头进程*/  
-void InsertLast(PCB *in,ReadyQueue *queue);   /*将进程插入到就绪队列尾部*/  
-void ProcessCreate();        /*进程创建函数*/  
-void RoundRun(ReadyQueue *timechip);    /*时间片轮转调度算法*/  
-void MultiDispatch();        /*多级调度算法，每次执行一个时间片*/  
+PCB *run=NULL,*finish=NULL;  
+ReadyQueue *Head = NULL;
+int num;     
+int ReadyNum;    
+void Output();        
+void InsertFinish(PCB *in);      
+void InsertPrio(ReadyQueue *in);    
+void PrioCreate();      
+void GetFirst(ReadyQueue *queue);    
+void InsertLast(PCB *in,ReadyQueue *queue);  
+void ProcessCreate();       
+void RoundRun(ReadyQueue *timechip);   
+void MultiDispatch();        
  
 int main(void)  
 {  
-PrioCreate(); /*创建就绪队列*/  
-ProcessCreate();/*创建就绪进程队列*/  
-MultiDispatch();/*算法开始*/  
-Output();  /*输出最终的调度序列*/  
+PrioCreate();
+ProcessCreate(); 
+MultiDispatch(); 
+Output();  
 return 0;  
 }  
-void Output()  /*进程信息输出函数*/  
+void Output() 
 {  
 ReadyQueue *print = Head;  
 PCB *p;  
-printf("进程名/t优先级/t轮数/tcpu时间/t需要时间/t进程状态/t计数器/n");  
+printf("pro ID  pri  round  cputime  needtime  proing  count");  
 while(print)  
 {  
   if(print ->LinkPCB != NULL)  
@@ -137,10 +137,10 @@ void PrioCreate() /*创建就绪队列输入函数*/
 ReadyQueue *tmp;  
 int i;  
  
-printf("输入就绪队列的个数：/n");  
+printf("int line number：");  
 scanf("%d",&ReadyNum);  
  
-printf("输入每个就绪队列的CPU时间片：/n");  
+printf("int cputime：");  
 for(i = 0;i < ReadyNum; i++)  
 {  
   if((tmp = (ReadyQueue *)malloc(sizeof(ReadyQueue)))==NULL)  
@@ -191,9 +191,9 @@ void ProcessCreate() /*进程创建函数*/
 PCB *tmp;  
 int i;  
  
-printf("输入进程的个数：/n");  
+printf("int pro number：");  
 scanf("%d",&num);  
-printf("输入进程名字和进程所需时间：/n");  
+printf("int pronameandtime：");  
 for(i = 0;i < num; i++)  
 {  
   if((tmp = (PCB *)malloc(sizeof(PCB)))==NULL)  
